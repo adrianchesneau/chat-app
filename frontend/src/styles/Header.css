@@ -68,3 +68,18 @@ span {
     color: white;
     margin-left: 20px;
 }
+
+.button.active {
+    font-weight: 725; /* Mettre la police en gras pour l'élément actif */
+    background-color: #0e0e0e; /* Changer la couleur de fond pour l'élément actif */
+  }
+
+button {
+	background: rgb(0, 0, 0);
+	border: none;
+	font: inherit;
+	cursor: pointer;
+    width: 230px;
+    height: 55px;
+
+}

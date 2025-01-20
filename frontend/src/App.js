@@ -9,7 +9,6 @@ import Research from './pages/Research.jsx';
 import Settings from './pages/Settings.jsx';
 import Login from './pages/Login.jsx';
 import Signup from './pages/Signup.jsx';
-import { useEffect } from 'react';
 
 const ProtectedRoute = ({ element }) => {
   const { user } = useAuth();
