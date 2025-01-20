@@ -5,6 +5,7 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const saltRounds = 10; 
 
+const JWT_SECRET = process.env.JWT_SECRET;
 
 router.post('/signup', async (req, res) => {
     const { username, email, password } = req.body;
@@ -24,7 +25,18 @@ router.post('/signup', async (req, res) => {
                     console.error('Erreur lors de l\'insertion des utilisateurs:', err);
                     return res.status(500).json({ message: 'Erreur serveur' });
                 }
-                res.status(200).json({ message: 'Utilisateur créé avec succès', data: results });
+
+                const token = jwt.sign(
+                    { userId: results.insertId, email },
+                    JWT_SECRET,
+                    { expiresIn: '1h' }
+                );
+
+                res.status(200).json({
+                    message: 'Utilisateur créé avec succès',
+                    token,
+                    user: { username, email },
+                });
             }
         );
     } catch (error) {
@@ -52,7 +64,7 @@ router.post('/signin', async (req, res) => {
                     return res.status(500).json({ message: 'Erreur serveur' });
                 }
 
-                else if (!results) {
+                if (results.length === 0) {
                     return res.status(404).json({ message: 'Utilisateur non trouvé' });
                 }
 
@@ -64,20 +76,25 @@ router.post('/signin', async (req, res) => {
                         return res.status(500).json({ message: 'Erreur serveur' });
                     }
 
-                    else if (!isMatch) {
+                    if (!isMatch) {
                         return res.status(401).json({ message: 'Mot de passe incorrect' });
                     }
-                    else{
-                        res.status(200).json({
+
+                    const token = jwt.sign(
+                        { id: user.id, email: user.email }, 
+                        JWT_SECRET, 
+                        { expiresIn: '2h' }
+                    );
+
+                    res.status(200).json({
                         message: 'Connexion réussie',
+                        token, 
                         user: {
                             id: user.id,
                             username: user.username,
                             email: user.email
-                   }
-                        });}
-
-
+                        }
+                    });
                 });
             }
         );
@@ -87,6 +104,23 @@ router.post('/signin', async (req, res) => {
     }
 });
 
+const authenticateToken = (req, res, next) => {
+    const token = req.headers['authorization'];
+    if (!token) return res.status(401).json({ message: 'Accès refusé, token manquant' });
+
+    jwt.verify(token.split(' ')[1], JWT_SECRET, (err, user) => {
+        if (err) return res.status(403).json({ message: 'Token invalide' });
+        req.user = user;
+        next();
+    });
+};
+
+router.get('/profile', authenticateToken, (req, res) => {
+    db.query('SELECT id, username, email FROM users WHERE id = ?', [req.user.id], (err, results) => {
+        if (err) return res.status(500).json({ message: 'Erreur serveur' });
+        res.status(200).json(results[0]);
+    });
+});
 
 
 module.exports = router;
