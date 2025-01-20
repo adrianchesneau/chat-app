@@ -1,50 +1,60 @@
-import { createBrowserRouter, RouterProvider, Link, NavLink, Outlet } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import './styles/App.css';
-import Header from './components/Header.jsx'
-import Home from './pages/Home.jsx'
-import Messages from './pages/Messages.jsx'
-import Profil from './pages/Profil.jsx'
-import Research from './pages/Research.jsx'
-import Settings from './pages/Settings.jsx'
+import { AuthProvider } from './contexts/AuthContext';
+import Header from './components/Header.jsx';
+import Home from './pages/Home.jsx';
+import Messages from './pages/Messages.jsx';
+import Profil from './pages/Profil.jsx';
+import Research from './pages/Research.jsx';
+import Settings from './pages/Settings.jsx';
+import Login from './pages/Login.jsx'; 
+import Signup from './pages/Signup.jsx'; 
 
+import ProtectedRoute from './routes/ProtectedRoute';
+
+const MainLayout = () => {
+  return (
+    <div className="site">
+      <Header />
+      <main className="Content">
+        <Outlet />
+      </main>
+    </div>
+  );
+};
 
 const router = createBrowserRouter([
+  {
+    path: '/login',
+    element: <Login />,
+  },
+  {
+    path: '/signup',
+    element: <Signup />,
+  },
+  {
+    path: '/',
+    element: <ProtectedRoute />,
+    children: [
       {
-            path:   '/' ,
-            element:   
-                <Header/>
-            ,
-            
-            children : [
-                {
-                    path:   '',
-                    element:    <Home/>
-                },
-                {
-                    path:   'research',
-                    element:    <Home/>
-                },
-                {
-                    path:   'messages',
-                    element:    <Home/>
-                },
-                {
-                    path:   'profil',
-                    element:    <Home/>
-                },
-                {
-                    path:   'settings',
-                    element:    <Home/>
-                }
-            ]
-    }
+        element: <MainLayout />,
+        children: [
+          { path: '', element: <Home /> },
+          { path: 'research', element: <Research /> },
+          { path: 'messages', element: <Messages /> },
+          { path: 'profil', element: <Profil /> },
+          { path: 'settings', element: <Settings /> },
+        ],
+      },
+    ],
+  },
 ]);
-
-
 
 function App() {
   return (
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   );
 }
 

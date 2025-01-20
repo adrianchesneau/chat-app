@@ -5,7 +5,7 @@ import { createBrowserRouter, RouterProvider, Link, NavLink, Outlet } from 'reac
 function Settings () {
     return(
         <div>
-            <p>contenu page</p>
+            <p>Settings</p>
         </div>
     )
 }

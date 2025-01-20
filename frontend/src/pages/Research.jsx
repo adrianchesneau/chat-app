@@ -5,7 +5,7 @@ import { createBrowserRouter, RouterProvider, Link, NavLink, Outlet } from 'reac
 function Research () {
     return(
         <div>
-            <p>contenu page</p>
+            <p>research</p>
         </div>
     )
 }

@@ -5,7 +5,7 @@ import { createBrowserRouter, RouterProvider, Link, NavLink, Outlet } from 'reac
 function Profil () {
     return(
         <div>
-            <p>contenu page</p>
+            <p>profil</p>
         </div>
     )
 }
