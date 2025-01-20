@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, useNavigate,Link  } from 'react-router-dom';
+import { NavLink, useNavigate, Link  } from 'react-router-dom';
 import '../styles/Header.css';
 import logo from '../assets/chat_app_logo.png';
 import 'boxicons'

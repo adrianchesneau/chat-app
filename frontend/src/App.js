@@ -1,16 +1,21 @@
-import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, Outlet, useNavigate } from 'react-router-dom';
 import './styles/App.css';
-import { AuthProvider } from './contexts/AuthContext';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
 import Header from './components/Header.jsx';
 import Home from './pages/Home.jsx';
 import Messages from './pages/Messages.jsx';
 import Profil from './pages/Profil.jsx';
 import Research from './pages/Research.jsx';
 import Settings from './pages/Settings.jsx';
-import Login from './pages/Login.jsx'; 
-import Signup from './pages/Signup.jsx'; 
+import Login from './pages/Login.jsx';
+import Signup from './pages/Signup.jsx';
+import { useEffect } from 'react';
 
-import ProtectedRoute from './routes/ProtectedRoute';
+const ProtectedRoute = ({ element }) => {
+  const { user } = useAuth();
+
+  return user ?     element: null;
+};
 
 const MainLayout = () => {
   return (
@@ -34,17 +39,27 @@ const router = createBrowserRouter([
   },
   {
     path: '/',
-    element: <ProtectedRoute />,
+    element: <ProtectedRoute element={<MainLayout />} />, 
     children: [
       {
-        element: <MainLayout />,
-        children: [
-          { path: '', element: <Home /> },
-          { path: 'research', element: <Research /> },
-          { path: 'messages', element: <Messages /> },
-          { path: 'profil', element: <Profil /> },
-          { path: 'settings', element: <Settings /> },
-        ],
+        path: '',
+        element: <Home />,
+      },
+      {
+        path: 'research',
+        element: <Research />,
+      },
+      {
+        path: 'messages',
+        element: <Messages />,
+      },
+      {
+        path: 'profil',
+        element: <Profil />,
+      },
+      {
+        path: 'settings',
+        element: <Settings />,
       },
     ],
   },
