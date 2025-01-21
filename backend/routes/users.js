@@ -122,5 +122,32 @@ router.get('/profile', authenticateToken, (req, res) => {
     });
 });
 
+router.get('/search', async (req, res) => {
+    const { query } = req.query; 
+
+    if (!query) {
+        return res.status(400).json({ message: 'Veuillez fournir un terme de recherche.' });
+    }
+
+    try {
+        const searchQuery = `%${query}%`;
+        db.query(
+            'SELECT id, username, profile_picture FROM users WHERE username LIKE ?',
+            [searchQuery],
+            (err, results) => {
+                if (err) {
+                    console.error('Erreur lors de la recherche des utilisateurs:', err);
+                    return res.status(500).json({ message: 'Erreur serveur' });
+                }
+                res.status(200).json(results);
+            }
+        );
+    } catch (error) {
+        console.error('Erreur inattendue:', error);
+        res.status(500).json({ message: 'Erreur serveur' });
+    }
+});
+
+
 
 module.exports = router;
