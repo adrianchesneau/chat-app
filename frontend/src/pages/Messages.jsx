@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
-import { createBrowserRouter, RouterProvider, Link, NavLink, Outlet } from 'react-router-dom';
+import  MsgScrollbar  from '../components/MsgScrollbar';
+import  Conversation  from '../components/Conversation';
+import   '../styles/Messages.css';
+
 
 
 function Messages () {
     return(
-        <div>
-            <p>message</p>
+        <div className='messageContainer'>
+            <Conversation/>
+            <MsgScrollbar/>
         </div>
     )
 }

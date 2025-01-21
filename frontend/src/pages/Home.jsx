@@ -1,25 +1,20 @@
 import React, { useEffect, useState } from 'react';
+import { getUserProfile } from '../api/userService';  // Importer la fonction
 
 function Home() {
-    const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null);
 
-    useEffect(() => {
-        const token = localStorage.getItem('token');
+  useEffect(() => {
+    const token = localStorage.getItem('token');
 
-        if (token) {
-            fetch('http://localhost:5000/api/users/profile', {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                setUser(data);
-            })
-            .catch(error => console.error('Erreur lors de la récupération des données:', error));
-        }
-    }, []);
+    if (token) {
+      getUserProfile(token)
+        .then(data => {
+          setUser(data);
+        })
+        .catch(error => console.error('Erreur lors de la récupération des données:', error));
+    }
+  }, []);
 
     return (
         <div>

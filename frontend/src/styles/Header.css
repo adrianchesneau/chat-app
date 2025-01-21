@@ -64,14 +64,14 @@ nav {
     align-items: center;
 }
 
-span {
+.button span {
     color: white;
     margin-left: 20px;
 }
 
 .button.active {
-    font-weight: 725; /* Mettre la police en gras pour l'élément actif */
-    background-color: #0e0e0e; /* Changer la couleur de fond pour l'élément actif */
+    font-weight: 725; 
+    background-color: #0e0e0e;
   }
 
 button {
