@@ -4,13 +4,12 @@ import  Conversation  from '../components/Conversation';
 
 import   '../styles/Messages.css';
 
-function Messages () {
+function MessageCard () {
     return(
-        <div className='messageContainer'>
-            <Conversation/>
-            <MsgScrollbar/>
-        </div>
+    <div className='msg'>
+        <p >coucouddddddzdzdzqzd</p>
+  </div>
     )
 }
 
-export default Messages;
+export default MessageCard;

@@ -2,7 +2,7 @@ import React from 'react';
 import '../styles/UserCard.css';
 
 const UserCard = ({ user }) => {
-  if (!user) return null;  // Vérifie si l'utilisateur est défini avant d'afficher
+  if (!user) return null;
 
   return (
     <div className='UserCard'>

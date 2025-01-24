@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getUserProfile } from '../api/userService';  // Importer la fonction
+import { getUserProfile } from '../api/userService';
 
 function Home() {
   const [user, setUser] = useState(null);

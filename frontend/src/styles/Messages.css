@@ -14,6 +14,7 @@
     border-left-width: 1px;
     border-color: #1c1e21;
     align-items: center;
+    
 }
 
 .searchBar{
@@ -35,8 +36,6 @@
     border-left: solid;
     border-left-width: 1px;
     border-color: #1c1e21;
-    justify-content: end;
-    align-items: center;
 }
 
 .discussion{
@@ -60,11 +59,108 @@
     display: flex;
     width: 100%;
     align-items: center;
+    margin-top: 20px;
     margin-bottom: 20px;
-justify-content: space-evenly;
+    justify-content: space-evenly;
 }
+
 
 .cardDisposal{
     padding-top: 20px;
     width: 100%;
 }
+
+.conversationHeader{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: solid;
+    border-bottom-width: 1px;
+    border-color: #1c1e21;
+    width: 100%;
+    height: 75px;
+    justify-content: space-between;
+}
+
+.logoConvoHeader{
+    margin: 10px;
+
+}
+
+.logoContainer{
+    display: flex;
+}
+
+.linkProfil{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 100%;
+    cursor: pointer;
+
+}
+
+
+
+.conversationContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Prend toute la hauteur de l'écran */
+    width: 100%;
+  }
+  
+  /* Conteneur des messages */
+  .msgContainer {
+    flex: 1; /* Prend tout l'espace disponible */
+    overflow-y: auto;  /* Ajoute une barre de défilement verticale si nécessaire */
+    padding: 10px;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 10px; /* Espacement entre les messages */
+  }
+  
+  /* Messages alignés à droite et à gauche */
+  .msg {
+    background-color: blue;
+    border-radius: 20px;
+    padding: 10px;
+    color: white;
+    align-self: flex-end;  /* Aligne à droite */
+    max-width: 80%;
+    word-wrap: break-word;
+  }
+  
+  .msg2 {
+    background-color: grey;
+    border-radius: 20px;
+    padding: 10px;
+    color: white;
+    align-self: flex-start;  /* Aligne à gauche */
+    max-width: 90%;
+    word-wrap: break-word;
+  }
+  
+  /* Barre de discussion */
+  .messageBar {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .msgContainer::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .msgContainer::-webkit-scrollbar-thumb {
+    background: #888; /* Couleur de la barre */
+    border-radius: 4px;
+  }
+  
+  .msgContainer::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Couleur au survol */
+  }

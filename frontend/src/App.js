@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider, Outlet, useNavigate } from 'react-router-dom';
+import ProtectedRoute from './routes/ProtectedRoute.jsx';
 import './styles/App.css';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import Header from './components/Header.jsx';
@@ -9,13 +10,12 @@ import Research from './pages/Research.jsx';
 import Settings from './pages/Settings.jsx';
 import Login from './pages/Login.jsx';
 import Signup from './pages/Signup.jsx';
+import { useEffect,useState } from 'react';
 
-const ProtectedRoute = ({ element }) => {
-  const { user } = useAuth();
+// Composant pour gérer les routes protégées
 
-  return user ?     element: null;
-};
 
+// Layout principal avec Header et Outlet
 const MainLayout = () => {
   return (
     <div className="site">
@@ -27,6 +27,7 @@ const MainLayout = () => {
   );
 };
 
+// Définition des routes
 const router = createBrowserRouter([
   {
     path: '/login',
@@ -38,7 +39,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/',
-    element: <ProtectedRoute element={<MainLayout />} />, 
+    element: <ProtectedRoute element={<MainLayout />} />, // Protéger cette route
     children: [
       {
         path: '',
@@ -49,11 +50,11 @@ const router = createBrowserRouter([
         element: <Research />,
       },
       {
-        path: 'messages',
+        path: '/messages',
         element: <Messages />,
       },
       {
-        path: 'profil',
+        path: ':username',
         element: <Profil />,
       },
       {

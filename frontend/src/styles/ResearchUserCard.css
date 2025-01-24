@@ -1,0 +1,60 @@
+.ResearchUserCard{
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    align-items: center;
+    color:white;
+    height: 70px;
+    width: 100%;
+    transition: background-color 0.2s ease;
+}
+
+.ResearchUserCard:hover{
+    background-color: #1c1e21;
+}
+
+.image-cropper {
+    margin: 10px;
+    min-height: 65px;
+    min-width: 65px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.rounded{
+    height: 100%;
+    width: auto;
+}
+
+.cardInfo{
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    margin: 0px;
+    justify-content: center;
+    width: 80%;
+}
+
+span{
+    margin: 0px;
+}
+
+.pseudo{
+    font-weight: bold;
+}
+
+.gris{
+    color:rgb(168, 168, 168);
+}
+
+.ResearchContainer{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.ResearchUserCard{
+    text-decoration: none;
+}
